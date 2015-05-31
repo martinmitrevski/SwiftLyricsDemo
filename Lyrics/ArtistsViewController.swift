@@ -96,7 +96,7 @@ class ArtistsViewController: AbstractViewController, UITableViewDataSource, UITa
     // MARK: util
     func fetchImageForArtist(artist: String) {
         let dataTask = self.session.dataTaskWithURL(self.searchImageUriForArtist(artist)) {
-            (data: NSData?, response: NSURLResponse?, error: NSError?) in
+            [weak self] (data: NSData?, response: NSURLResponse?, error: NSError?) in
             var json: AnyObject? = NSJSONSerialization.JSONObjectWithData(data!, options:nil, error:nil)
             if let jsonDictionary = json as? NSDictionary {
                 if let photos = jsonDictionary["photos"] as? NSDictionary {
@@ -107,7 +107,7 @@ class ArtistsViewController: AbstractViewController, UITableViewDataSource, UITa
                             var id: NSString = first["id"] as! NSString
                             var secret: NSString = first["secret"] as! NSString
                             var imageString = "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret).jpg"
-                            self.getImageAtLocation(imageString, artist: artist)
+                            self!.getImageAtLocation(imageString, artist: artist)
                         }
                         
                     }
@@ -130,13 +130,13 @@ class ArtistsViewController: AbstractViewController, UITableViewDataSource, UITa
     func getImageAtLocation(location: String, artist: String) {
         let url = NSURL(string: location)!
         let imageTask = session.dataTaskWithURL(url) {
-            (data: NSData?, response: NSURLResponse?, error: NSError?) in
+            [weak self] (data: NSData?, response: NSURLResponse?, error: NSError?) in
             if let image = UIImage(data: data!) {
-                self.images[artist] = image
-                var index = find(self.artists, artist)!
+                self!.images[artist] = image
+                var index = find(self!.artists, artist)!
                 var indexPath = NSIndexPath(forRow: index, inSection: 0)
                 dispatch_async(dispatch_get_main_queue(),{
-                    self.tableView .reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                    self!.tableView .reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                 })
             }
         }

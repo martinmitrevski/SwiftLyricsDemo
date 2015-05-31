@@ -24,9 +24,11 @@ class ArtistViewController: AbstractViewController, UITableViewDataSource, UITab
     
     func loadAlbumsForArtist(artist: String) {
         var baseUri = "\(GlobalConstants.MusixMatchEndpoint)/\(GlobalConstants.MusixMatchSearchArtist)"
-        var uriParameters = "\(baseUri)?apikey=\(GlobalConstants.MusixMatchApiKey)&q_artist=\(artist)&page_size=1"
+        let escapedArtist = artist.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+        var uriParameters = "\(baseUri)?apikey=\(GlobalConstants.MusixMatchApiKey)&q_artist=\(escapedArtist)&page_size=1"
         var url = NSURL(string: uriParameters)!
-        var artistsTask = session.dataTaskWithURL(url, completionHandler: { (data, response, error) in
+        var artistsTask = session.dataTaskWithURL(url, completionHandler: {
+            [weak self] (data, response, error) in
             var json: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil)
             if let jsonDict = json as? NSDictionary {
                 if let message = jsonDict["message"] as? NSDictionary {
@@ -35,7 +37,7 @@ class ArtistViewController: AbstractViewController, UITableViewDataSource, UITab
                             if let first = artistList[0] as? NSDictionary {
                                 if let artistDict = first["artist"] as? NSDictionary {
                                     var artistId = artistDict["artist_id"] as! NSNumber
-                                    self.albumsForArtistWithId(artistId)
+                                    self!.albumsForArtistWithId(artistId)
                                 }
                             }
                         }
@@ -50,7 +52,8 @@ class ArtistViewController: AbstractViewController, UITableViewDataSource, UITab
         var baseUri = "\(GlobalConstants.MusixMatchEndpoint)/\(GlobalConstants.MusixMatchSearchAlbums)"
         var uriParameters = "\(baseUri)?apikey=\(GlobalConstants.MusixMatchApiKey)&artist_id=\(artistId)&page_size=100&s_release_date=desc"
         var url = NSURL(string: uriParameters)!
-        var albumsTask = session.dataTaskWithURL(url, completionHandler: { (data, response, error) in
+        var albumsTask = session.dataTaskWithURL(url, completionHandler: {
+            [weak self] (data, response, error) in
             var json: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil)
             if let jsonDict = json as? NSDictionary {
                 if let message = jsonDict["message"] as? NSDictionary {
@@ -61,11 +64,11 @@ class ArtistViewController: AbstractViewController, UITableViewDataSource, UITab
                                 var releaseType = albumDict["album_release_type"] as? String
                                 if releaseType == "Album" {
                                     var anAlbum: Album = Album(dictionary: albumDict)
-                                    self.albums.append(anAlbum)
+                                    self!.albums.append(anAlbum)
                                 }
                             }
                             dispatch_async(dispatch_get_main_queue(),{
-                                self.tableView.reloadData()
+                                self!.tableView.reloadData()
                             })
                         }
                     }
