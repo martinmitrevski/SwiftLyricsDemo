@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol PickerViewDelegate {
+protocol PickerViewDelegate : class {
     func doneButtonTapped()
     func pickerViewSelectionChangedWithIndex(index: Int)
 }
 
 class PickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var picker: UIPickerView!
-    var delegate: PickerViewDelegate?
+    weak var delegate: PickerViewDelegate?
     var numberOfItems: Int!
     
     func setupWithDelegate(aDelegate: PickerViewDelegate, itemsNumber: Int) {
