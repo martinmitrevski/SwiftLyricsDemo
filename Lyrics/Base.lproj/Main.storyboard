@@ -159,10 +159,49 @@
                                     <outlet property="delegate" destination="yTg-7w-TY0" id="jti-l3-8rC"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbv-B5-syw" customClass="PickerView" customModule="Lyrics" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="346" width="600" height="210"/>
+                                <subviews>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I4x-dk-V9U">
+                                        <rect key="frame" x="0.0" y="48" width="600" height="162"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="162" id="Zs9-6x-VpF"/>
+                                        </constraints>
+                                    </pickerView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o0h-no-2E8">
+                                        <rect key="frame" x="555" y="8" width="37" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="f9Z-Hr-Mft"/>
+                                            <constraint firstAttribute="width" constant="37" id="jZm-Cv-E4K"/>
+                                        </constraints>
+                                        <state key="normal" title="Done">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="doneTapped:" destination="fbv-B5-syw" eventType="touchUpInside" id="BUT-vl-07k"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="210" id="0aw-Z1-Whe"/>
+                                    <constraint firstAttribute="trailing" secondItem="I4x-dk-V9U" secondAttribute="trailing" id="3iK-ra-6pC"/>
+                                    <constraint firstItem="o0h-no-2E8" firstAttribute="top" secondItem="fbv-B5-syw" secondAttribute="top" constant="8" id="KPI-Ni-9By"/>
+                                    <constraint firstAttribute="bottom" secondItem="I4x-dk-V9U" secondAttribute="bottom" id="deF-fF-L2Y"/>
+                                    <constraint firstItem="I4x-dk-V9U" firstAttribute="leading" secondItem="fbv-B5-syw" secondAttribute="leading" id="fLj-v1-CBb"/>
+                                    <constraint firstAttribute="trailing" secondItem="o0h-no-2E8" secondAttribute="trailing" constant="8" id="uun-pU-vQj"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="picker" destination="I4x-dk-V9U" id="Ban-6P-8iR"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="iO8-pX-Upm" firstAttribute="top" secondItem="IHy-ld-xDX" secondAttribute="bottom" id="Hw9-Uf-QsI"/>
+                            <constraint firstItem="6wt-Sk-p4J" firstAttribute="top" secondItem="fbv-B5-syw" secondAttribute="bottom" id="PsP-Bc-u0X"/>
+                            <constraint firstItem="fbv-B5-syw" firstAttribute="leading" secondItem="y2Q-9u-afU" secondAttribute="leading" id="QnW-rZ-UDd"/>
+                            <constraint firstAttribute="trailing" secondItem="fbv-B5-syw" secondAttribute="trailing" id="SFh-fu-ddL"/>
                             <constraint firstItem="iO8-pX-Upm" firstAttribute="top" secondItem="y2Q-9u-afU" secondAttribute="topMargin" id="ZPA-52-Wte"/>
                             <constraint firstAttribute="trailing" secondItem="iO8-pX-Upm" secondAttribute="trailing" id="mnI-iF-NxV"/>
                             <constraint firstItem="iO8-pX-Upm" firstAttribute="leading" secondItem="y2Q-9u-afU" secondAttribute="leading" id="sRO-V0-HEk"/>
@@ -175,6 +214,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="picker" destination="fbv-B5-syw" id="k0K-T7-3iK"/>
                         <outlet property="tableView" destination="iO8-pX-Upm" id="3gQ-mb-aJx"/>
                     </connections>
                 </viewController>

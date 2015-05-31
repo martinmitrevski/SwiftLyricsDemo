@@ -8,9 +8,11 @@
 
 import UIKit
 
-class ArtistViewController: AbstractViewController, UITableViewDataSource, UITableViewDelegate {
+class ArtistViewController: AbstractViewController, UITableViewDataSource, UITableViewDelegate, PickerViewDelegate {
     
+    var limitOfAlbums: Int!
     var artist: String?
+    @IBOutlet weak var picker: PickerView!
     
     @IBOutlet weak var tableView: UITableView!
     var albums = Array<Album>()
@@ -18,8 +20,30 @@ class ArtistViewController: AbstractViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        limitOfAlbums = 0
+        picker.alpha = 0.0
         self.navigationItem.title = artist
+        addRightBarButton()
         loadAlbumsForArtist(artist!)
+    }
+    
+    func addRightBarButton() {
+        var limitButton = UIBarButtonItem(title: "Set Limit", style: UIBarButtonItemStyle.Done, target: self, action: "setLimit")
+        self.navigationItem.rightBarButtonItem = limitButton
+    }
+    
+    func setupPickerView() {
+        picker.setupWithDelegate(self, itemsNumber: albums.count)
+        picker.backgroundColor = UIColor.RGBColorWithRed(240, green: 240, blue: 240, alpha: 1.0)
+    }
+    
+    func setLimit() {
+        setupPickerView()
+        UIView.animateWithDuration(0.25, animations: { [weak self] () in
+            self!.picker.alpha = 1.0
+        }) { [weak self] (success) in
+            self!.picker.hidden = false
+        }
     }
     
     func loadAlbumsForArtist(artist: String) {
@@ -67,6 +91,7 @@ class ArtistViewController: AbstractViewController, UITableViewDataSource, UITab
                                     self!.albums.append(anAlbum)
                                 }
                             }
+                            self!.limitOfAlbums = self!.albums.count
                             dispatch_async(dispatch_get_main_queue(),{
                                 self!.tableView.reloadData()
                             })
@@ -87,11 +112,25 @@ class ArtistViewController: AbstractViewController, UITableViewDataSource, UITab
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return albums.count
+        return limitOfAlbums
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView .deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    // MARK: picker view
+    func pickerViewSelectionChangedWithIndex(index: Int) {
+        limitOfAlbums = index + 1
+        tableView.reloadData()
+    }
+    
+    func doneButtonTapped() {
+        UIView.animateWithDuration(0.25, animations: { [weak self] () in
+            self!.picker.alpha = 0.0
+            }) { [weak self] (success) in
+                self!.picker.hidden = true
+        }
     }
 
 }

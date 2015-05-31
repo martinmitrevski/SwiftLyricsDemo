@@ -20,6 +20,8 @@
 		E83C13431B1920B900021001 /* AbstractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83C13421B1920B900021001 /* AbstractViewController.swift */; };
 		E83C13451B1921CD00021001 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83C13441B1921CD00021001 /* Album.swift */; };
 		E83C13471B192D5D00021001 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83C13461B192D5D00021001 /* AlbumCell.swift */; };
+		E8D77CF31B1B73D200B7F919 /* RGBColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D77CF21B1B73D200B7F919 /* RGBColor.swift */; };
+		E8D77CF51B1B771200B7F919 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D77CF41B1B771200B7F919 /* PickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		E83C13421B1920B900021001 /* AbstractViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractViewController.swift; sourceTree = "<group>"; };
 		E83C13441B1921CD00021001 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		E83C13461B192D5D00021001 /* AlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
+		E8D77CF21B1B73D200B7F919 /* RGBColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBColor.swift; sourceTree = "<group>"; };
+		E8D77CF41B1B771200B7F919 /* PickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,7 @@
 		E83C12FD1B18A29F00021001 /* Lyrics */ = {
 			isa = PBXGroup;
 			children = (
+				E8D77CF11B1B716A00B7F919 /* util */,
 				E83C13311B18B31800021001 /* view */,
 				E83C13301B18B31100021001 /* model */,
 				E83C132D1B18B2D500021001 /* controller */,
@@ -153,8 +158,17 @@
 			children = (
 				E83C13321B18B35600021001 /* ArtistCell.swift */,
 				E83C13461B192D5D00021001 /* AlbumCell.swift */,
+				E8D77CF41B1B771200B7F919 /* PickerView.swift */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		E8D77CF11B1B716A00B7F919 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				E8D77CF21B1B73D200B7F919 /* RGBColor.swift */,
+			);
+			name = util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8D77CF31B1B73D200B7F919 /* RGBColor.swift in Sources */,
 				E83C13351B18B37300021001 /* ArtistsViewController.swift in Sources */,
 				E83C13331B18B35600021001 /* ArtistCell.swift in Sources */,
 				E83C13011B18A29F00021001 /* AppDelegate.swift in Sources */,
@@ -265,6 +280,7 @@
 				E83C13391B18E90500021001 /* Constants.swift in Sources */,
 				E83C13431B1920B900021001 /* AbstractViewController.swift in Sources */,
 				E83C13451B1921CD00021001 /* Album.swift in Sources */,
+				E8D77CF51B1B771200B7F919 /* PickerView.swift in Sources */,
 				E83C13411B191FD700021001 /* ArtistViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,6 +479,7 @@
 				E83C131C1B18A29F00021001 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E83C131D1B18A29F00021001 /* Build configuration list for PBXNativeTarget "LyricsTests" */ = {
 			isa = XCConfigurationList;
@@ -471,6 +488,7 @@
 				E83C131F1B18A29F00021001 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
